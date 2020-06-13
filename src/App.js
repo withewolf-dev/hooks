@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import NavBar from './Components/NavBar'
+import {Route,Switch} from 'react-router-dom'
+import MovieProvider from './Contexts/MovieProvider'
+import Api from './Components/Api'
+import Material from './Components/Material'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Switch>
+      <MovieProvider>
+        <Route
+       exact
+       path='/search/:name'
+         render={(routeProps)=><Material searchQuery={routeProps.match.params.name}/>}
+       />
+    </MovieProvider>
+        <Route
+          
+          path='/'
+          render={()=><NavBar/>}
+        />
+      </Switch>
+    // {/* <Switch>
+    
+    //   <Route
+    //  exact
+    //  path='/search/:name'
+    //    render={(routeProps)=><MovieProvider searchQuery={routeProps.match.params.name}/>}
+    //  />
+  
+    //   <Route
+        
+    //     path='/'
+    //     render={()=><NavBar/>}
+    //   />
+    // </Switch> */}
   );
 }
 
 export default App;
+
